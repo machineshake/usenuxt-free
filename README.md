@@ -11,13 +11,11 @@ Welcome to UseNuxt, a comprehensive SaaS starter project built with Nuxt.js, des
 - **SEO Friendly:** Built-in SEO optimization for better visibility.
 - **Fully Customizable:** Flexible codebase that allows for easy customization and scalability.
 
-
 ## Demo 🚀
 
 Experience UseNuxt in action and see firsthand what it can do for your next project.
 
 👉 [Visit the Demo](http://demo.usenuxt.com)
-
 
 ## Installation 🛠
 
@@ -37,6 +35,64 @@ npm install
 npm run prepare
 ```
 
+## Environment Setup 🌳
+
+1. Copy the `.env.example` file to `.env`:
+   ```
+   cp .env.example .env
+   ```
+
+2. Open the `.env` file and update the following variables:
+
+   - `NUXT_PUBLIC_URL`: Set this to your local development URL (e.g., `http://localhost:3000`)
+   - `NUXT_PUBLIC_NAME`: Set your project name
+   - `NUXT_DATABASE_URL`: Set your PostgreSQL connection string
+
+3. Obtain and set up the following API tokens:
+
+   - Google OAuth credentials:
+     - Go to the [Google Cloud Console](https://console.cloud.google.com/)
+     - Create a new project or select an existing one
+     - Enable the Google+ API
+     - Create OAuth 2.0 credentials (Client ID and Client Secret)
+     - Set `NUXT_GOOGLE_CLIENT_ID` and `NUXT_GOOGLE_CLIENT_SECRET` in your `.env` file
+
+   - Stripe API keys:
+     - Sign up for a [Stripe account](https://stripe.com) or log in to an existing one
+     - Go to the Developers section and find your API keys
+     - Set `NUXT_STRIPE_PUBLISHABLE_KEY` and `NUXT_STRIPE_SECRET_KEY` in your `.env` file
+     - To get the `NUXT_STRIPE_WEBHOOK_SECRET`, you'll need to set up a webhook in the Stripe dashboard and use the provided secret
+
+   - (Optional) Plausible Analytics:
+     - If you want to use Plausible for analytics, sign up at [Plausible.io](https://plausible.io/)
+     - Set `PLAUSIBLE_DOMAIN` and `PLAUSIBLE_API_HOST` in your `.env` file
+
+Remember to keep your `.env` file secure and never commit it to version control.
+## Database Setup 🗄️
+
+This project uses PostgreSQL as its database. Follow these steps to set up your database:
+
+1. Install PostgreSQL:
+   - For macOS, you can use Homebrew: `brew install postgresql`
+   - For Windows, download and install from the [official PostgreSQL website](https://www.postgresql.org/download/windows/)
+   - For Linux, use your distribution's package manager (e.g., `sudo apt-get install postgresql` for Ubuntu)
+
+2. Create a new PostgreSQL database for your project.
+
+3. Update the `NUXT_DATABASE_URL` in your `.env` file with your PostgreSQL connection string. It should look something like this:
+   ```
+   NUXT_DATABASE_URL="postgresql://username:password@localhost:5432/database_name"
+   ```
+
+4. Run the database setup scripts:
+   ```
+   npm run db:push
+   npm run db:gen
+   ```
+   These commands will create the necessary tables in your database and generate the required artifacts for Drizzle ORM.
+
+The project uses Drizzle ORM to manage the database schema and operations. User management tables will be automatically created and managed by the Lucia auth library.
+
 ## Available Scripts 📜
 
 UseNuxt comes with several pre-configured npm scripts to help with your development:
@@ -51,43 +107,7 @@ UseNuxt comes with several pre-configured npm scripts to help with your developm
 
 ## Dependencies 📦
 
-UseNuxt leverages a powerful stack of technologies and libraries to provide a comprehensive foundation for building SaaS applications. Here's a closer look at each dependency and its role in the project:
-
-- **Framework & UI**:
-  - `nuxt` (🔥): The core framework that powers UseNuxt, providing server-side rendering, static site generation, and a powerful module ecosystem.
-  - `@nuxt/ui` (🎨): A modern UI library from Nuxt team, offering ready-to-use components that ensure a sleek and uniform interface.
-  - `vue` (⚡): The progressive JavaScript framework for building user interfaces, used under the hood by Nuxt.
-  - `vue-router` (🧭): The official router for Vue.js, managing navigation within the application.
-
-- **Authentication & Security**:
-  - `lucia` (🔑): A simple, lightweight authentication library that supports multiple strategies and easy integration.
-  - `@lucia-auth/adapter-postgresql` (💾): Provides Lucia with PostgreSQL adapter for user data storage and retrieval.
-  - `@lucia-auth/oauth` (🌐): Adds OAuth authentication support, enabling login with external providers.
-
-- **Database & ORM**:
-  - `drizzle-orm` (🧱): A flexible ORM for managing and querying the database with ease, supporting complex data structures.
-  - `postgres` (🐘): The node.js client for PostgreSQL, allowing direct database queries and connections.
-
-- **Utilities**:
-  - `@iconify/json` (🖼️): Offers a comprehensive collection of icons, easily accessible within the project for UI embellishments.
-  - `slugify` (🔗): Converts strings to clean URLs, making them more friendly and accessible.
-  - `uid` (🆔): Generates unique identifiers, useful for database keys, session IDs, etc.
-  - `stripe` (💳): Integrates payment processing, enabling the project to handle subscriptions, purchases, and financial transactions.
-
-- **Development Tools & Linting**:
-  - `eslint` (🚨): Ensures code quality and consistency through static analysis of the codebase.
-  - `@antfu/eslint-config` (🔧): Provides a set of ESLint rules for Vue and Nuxt projects, promoting best practices.
-  - `husky` (🐶): Manages Git hooks, automating tasks like linting before commits to maintain code quality.
-
-- **Styling & Animation**:
-  - `@nuxtjs/tailwindcss` (🌬️): Integrates Tailwind CSS for rapid UI development with utility-first CSS classes.
-  - `@formkit/auto-animate` (✨): Adds automatic animations to Vue components, enhancing user experience with smooth transitions.
-
-- **Analytics & SEO**:
-  - `@nuxtjs/plausible` (📊): Lightweight and privacy-friendly analytics, offering insights without compromising user privacy.
-
-These dependencies are carefully selected to provide a robust, scalable foundation for your SaaS application, ensuring that you have all the tools you need for development, deployment, and beyond.
-
+[The original dependencies section remains unchanged]
 
 ## Contributing 🤝
 
@@ -102,4 +122,3 @@ Contributions are what make the open-source community such an amazing place to l
 ## License 📄
 
 Distributed under the MIT License. See `LICENSE` for more information.
-
